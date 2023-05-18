@@ -1,0 +1,21 @@
+Hướng dẫn có tại link: https://create-react-app.dev/
+sử dụng câu lệnh: npx create-react-app my-app là có thể tạo dư án reactjs
+
+Sau khi chạy xong các câu lệnh thì sẽ có được dự án reactjs với các thư mục khác nhau. 
+Đây là phần giải thích các thư mục trong dự án reactjs
+1. Thư mục node_modules: Chứa thông tin về các gói, thư viện được cài đặt, ko cần quan tâm lắm đâu
+2. Thư mục public: Cái cần quan tâm là bên trong thư mục này có 1 thằng index.html là file sẽ được chạy khi dự án được chạy
+3. Thư mục src: đây là thư mục chứa code của dự án. Bên trong có các file:
+    a. file index.js: Chứa các đoạn js để tạo ra 1 thằng component là root ( thành phần, xem nó như 1 khối code là được). 
+    Nó sẽ có câu lệnh: root.render(<chứa các component>). các component chính là được tạo ra từ file App.js bằng lệnh return.
+    b. file App.js: chứa các đoạn mã js để trả lại các component mà sẽ được nhét vào thằng root.render() của index.js. câu lệnh export default App giúp nó có thể được import ở file index.js
+File package.json chứa các thông tin khác nhau, nhưng t muốn mn để ý tới đoạn: 
+    "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  }
+  chứa các câu lệnh mà được app của bọn mk định nghĩa nên có thể dùng được. Ví dụ: npm start, npm build, ...
+  
+Còn mấy file khác không đáng quan tâm lắm.

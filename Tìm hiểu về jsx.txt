@@ -1,0 +1,16 @@
+1. Jsx là gì? Tại sao cần sử dụng.
+Nói chung thì nó là 1 dạng cú pháp của javascript. Ví dụ này:
+    const lastname = 'duc'
+
+    const sum = (a,b) => a + b
+
+    const element = (
+    <h1>
+        hello world! I am {lastname}
+    </h1>
+    )
+Đó, cách khởi tạo biến là của js, nhưng giá trị của biến có dạng html. 
+Có thể nhúng vào các phần tử khác ( cái này có ích lắm này, nhúng cũng như là nhét vào phần tử khác ấy).
+Nó giúp chống SQL injection. Chỉ cần biết vậy thôi chứ biết thêm tốn thời gian.
+2. 1 vài chú ý khi sử dụng: - Tên thuộc tính cần chuyển sang dạng babel. Ví dụ: const element2 = <a href = 'google.com' tabIndex='11' className='123' id='the-a'>Google</a>. Tự so sánh khác biệt với html thông thường nhé.
+Hôm nay ngắn gọn vậy thôi. 
