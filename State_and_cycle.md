@@ -172,4 +172,69 @@ this.setState(function(state, props) {
 });
 ```
 Dài quá, thôi để mai viết tiếp nhé.
+# Ngày mới lại tới, t lại trở lại với ae đây.
+3. State Updates are Merged ( state updates bị gộp lại)
+Khi bạn gọi setState(), React sẽ hợp nhất đối tượng bạn cung cấp vào trạng thái hiện tại.
 
+Ví dụ: trạng thái của bạn có thể chứa một số biến độc lập:
+```jsx
+  constructor(props) {
+    super(props);
+    this.state = {
+      posts: [],
+      comments: []
+    };
+  }
+```
+Sau đó, bạn có thể cập nhật chúng một cách độc lập với các lệnh gọi setState() riêng biệt:
+```jsx
+  componentDidMount() {
+    fetchPosts().then(response => {
+      this.setState({
+        posts: response.posts
+      });
+    });
+
+    fetchComments().then(response => {
+      this.setState({
+        comments: response.comments
+      });
+    });
+  }
+```
+Việc hợp nhất còn nông, vì vậy this.setState({comments}) giữ nguyên this.state.posts nhưng thay thế hoàn toàn this.state.comments.
+
+## The Data Flows Down
+Cả các component cha và con đều không thể biết liệu một component nhất định có trạng thái hay không trạng thái và chúng không quan tâm liệu nó được định nghĩa là một hàm hay một lớp.
+
+Đây là lý do tại sao trạng thái thường được gọi là cục bộ hoặc được đóng gói. Nó không thể truy cập được đối với bất kỳ thành phần nào ngoài thành phần sở hữu và thiết lập nó.
+
+Một thành phần có thể chọn chuyển trạng thái của nó xuống dưới dạng props cho các thành phần con của nó:
+```jsx
+<FormattedDate date={this.state.date} />
+```
+component FormattedDate sẽ nhận ngày trong props của nó và sẽ không biết liệu nó đến từ state của Clock, từ props của Clock hay được gõ bằng tay:
+```jsx
+function FormattedDate(props) {
+  return <h2>It is {props.date.toLocaleTimeString()}.</h2>;
+}
+```
+Điều này thường được gọi là luồng dữ liệu "từ trên xuống" hoặc "một chiều". Mọi trạng thái luôn được sở hữu bởi một số thành phần cụ thể và mọi dữ liệu hoặc giao diện người dùng bắt nguồn từ trạng thái đó chỉ có thể ảnh hưởng đến các thành phần "bên dưới" chúng trong cây.
+
+Nếu bạn tưởng tượng một cây thành phần giống như một thác nước của các thuộc tính, trạng thái của mỗi thành phần giống như một nguồn nước bổ sung nối với nó tại một điểm tùy ý nhưng cũng chảy xuống.
+
+Để chỉ ra rằng tất cả các thành phần thực sự bị cô lập, chúng ta có thể tạo một component App render 3 <Clock>:
+```jsx
+function App() {
+  return (
+    <div>
+      <Clock />
+      <Clock />
+      <Clock />
+    </div>
+  );
+}
+```
+Mỗi Clock thiết lập bộ đếm thời gian riêng và cập nhật độc lập.
+
+Trong các ứng dụng React, việc một coponent có trạng thái hay không trạng thái được coi là chi tiết triển khai của coponent có thể thay đổi theo thời gian. Bạn có thể sử dụng các coponent không trạng thái bên trong các coponent có trạng thái và ngược lại.
