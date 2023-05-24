@@ -198,11 +198,11 @@ Sau đó, bạn có thể cập nhật chúng một cách độc lập với cá
     fetchComments().then(response => {
       this.setState({
         comments: response.comments
+        // với các viết này thự state tự động có thêm key commmets
       });
     });
   }
 ```
-Việc hợp nhất còn nông, vì vậy this.setState({comments}) giữ nguyên this.state.posts nhưng thay thế hoàn toàn this.state.comments.
 
 ## The Data Flows Down
 Cả các component cha và con đều không thể biết liệu một component nhất định có trạng thái hay không trạng thái và chúng không quan tâm liệu nó được định nghĩa là một hàm hay một lớp.
